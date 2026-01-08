@@ -1,1 +1,365 @@
-# SQL
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم SQL - الـ 15 خطوة كاملة</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60; /* تغيير طفيف للون الأخضر */
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --code-bg: #1e1e1e;
+            --terminal-bg: #0c0c0c;
+            --terminal-text: #00ff00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); /* تدرج لوني مميز */
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        header h1 { margin: 0; font-size: 2.2rem; }
+        header p { margin-top: 10px; opacity: 0.95; font-size: 1.1rem; }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            font-size: 1.5rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-right: 5px solid var(--accent-color); /* شريط جانبي جمالي */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+
+        h3 { margin: 0; color: var(--primary-color); font-size: 1.2rem; }
+
+        /* تنسيق الكود */
+        .code-block {
+            background-color: var(--code-bg);
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .keyword { color: #569cd6; font-weight: bold; } 
+        .string { color: #ce9178; } 
+        .number { color: #b5cea8; } 
+
+        /* تنسيق التيرمينال */
+        .terminal-block {
+            background-color: var(--terminal-bg);
+            color: var(--terminal-text);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85em;
+            border: 1px solid #333;
+            direction: ltr;
+            text-align: left;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .terminal-label {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 5px;
+            display: block;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>التطبيق العملي الكامل للـ SQL</h1>
+        <p>الخطوات الـ 15 مرتبة بالتسلسل (إنشاء، إدخال، تعديل، استعلام، حذف)</p>
+    </header>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">1</span><h3>إنشاء جدول الأقسام</h3></div>
+        <div class="code-block">
+            <span class="keyword">CREATE TABLE</span> Department (<br>
+            &nbsp;&nbsp;dept_id <span class="keyword">INT PRIMARY KEY</span>,<br>
+            &nbsp;&nbsp;dept_name <span class="keyword">VARCHAR</span>(50),<br>
+            &nbsp;&nbsp;location <span class="keyword">VARCHAR</span>(50)<br>
+            );
+        </div>
+        <div class="terminal-block">Command(s) completed successfully.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">2</span><h3>إنشاء جدول الطلاب</h3></div>
+        <div class="code-block">
+            <span class="keyword">CREATE TABLE</span> Students (<br>
+            &nbsp;&nbsp;student_id <span class="keyword">INT PRIMARY KEY</span>,<br>
+            &nbsp;&nbsp;student_name <span class="keyword">VARCHAR</span>(50),<br>
+            &nbsp;&nbsp;age <span class="keyword">INT</span>,<br>
+            &nbsp;&nbsp;dept_id <span class="keyword">INT</span>,<br>
+            &nbsp;&nbsp;<span class="keyword">FOREIGN KEY</span> (dept_id) <span class="keyword">REFERENCES</span> Department(dept_id)<br>
+            );
+        </div>
+        <div class="terminal-block">Command(s) completed successfully.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">3</span><h3>إدخال بيانات الأقسام</h3></div>
+        <div class="code-block">
+            <span class="keyword">INSERT INTO</span> Department (dept_id, dept_name, location)<br>
+            <span class="keyword">VALUES</span><br>
+            (1, <span class="string">'Computer Science'</span>, <span class="string">'Building A'</span>),<br>
+            (2, <span class="string">'Information Systems'</span>, <span class="string">'Building B'</span>),<br>
+            (3, <span class="string">'Engineering'</span>, <span class="string">'Building C'</span>);
+        </div>
+        <div class="terminal-block">(3 rows affected)</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">4</span><h3>عرض جدول الأقسام</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Department;
+        </div>
+        <div class="terminal-block">
+dept_id | dept_name           | location
+--------|---------------------|-----------
+1       | Computer Science    | Building A
+2       | Information Systems | Building B
+3       | Engineering         | Building C
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">5</span><h3>إدخال بيانات الطلاب</h3></div>
+        <div class="code-block">
+            <span class="keyword">INSERT INTO</span> Students (student_id, student_name, age, dept_id)<br>
+            <span class="keyword">VALUES</span><br>
+            (101, <span class="string">'Ali'</span>, <span class="number">20</span>, 1),<br>
+            (102, <span class="string">'Sara'</span>, <span class="number">22</span>, 2),<br>
+            (103, <span class="string">'Omar'</span>, <span class="number">21</span>, 1),<br>
+            (104, <span class="string">'Zainab'</span>, <span class="number">23</span>, 3);
+        </div>
+        <div class="terminal-block">(4 rows affected)</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">6</span><h3>عرض جدول الطلاب</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Students;
+        </div>
+        <div class="terminal-block">
+student_id | student_name | age | dept_id
+-----------|--------------|-----|--------
+101        | Ali          | 20  | 1
+102        | Sara         | 22  | 2
+103        | Omar         | 21  | 1
+104        | Zainab       | 23  | 3
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">7</span><h3>تحديث بيانات (تغيير عمر علي)</h3></div>
+        <div class="code-block">
+            <span class="keyword">UPDATE</span> Students <br>
+            <span class="keyword">SET</span> age = <span class="number">21</span><br>
+            <span class="keyword">WHERE</span> student_name = <span class="string">'Ali'</span>;
+        </div>
+        <div class="terminal-block">(1 row affected)</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">8</span><h3>إضافة عمود جديد (Email)</h3></div>
+        <div class="code-block">
+            <span class="keyword">ALTER TABLE</span> Students<br>
+            <span class="keyword">ADD</span> email <span class="keyword">VARCHAR</span>(100);
+        </div>
+        <div class="terminal-block">Command(s) completed successfully.</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">9</span><h3>تغيير اسم عمود (في جدول الأقسام)</h3></div>
+        <div class="code-block">
+            <span class="keyword">EXEC</span> sp_rename <span class="string">'Department.dept_name'</span>, <span class="string">'department_name'</span>, <span class="string">'COLUMN'</span>;
+        </div>
+        <div class="terminal-block">
+Caution: Changing any part of an object name could break scripts and stored procedures.
+Object was renamed to 'department_name'.
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">10</span><h3>حذف سجل (حذف الطالب Omar)</h3></div>
+        <div class="code-block">
+            <span class="keyword">DELETE FROM</span> Students<br>
+            <span class="keyword">WHERE</span> student_name = <span class="string">'Omar'</span>;
+        </div>
+        <div class="terminal-block">(1 row affected)</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">11</span><h3>الربط الداخلي (INNER JOIN)</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Students <br>
+            <span class="keyword">INNER JOIN</span> Department<br>
+            <span class="keyword">ON</span> Students.dept_id = Department.dept_id;
+        </div>
+        <div class="terminal-block">
+student_id | Name   | age | dept | email | dept_id | department_name     | location
+-----------|--------|-----|------|-------|---------|---------------------|-----------
+101        | Ali    | 21  | 1    | NULL  | 1       | Computer Science    | Building A
+102        | Sara   | 22  | 2    | NULL  | 2       | Information Systems | Building B
+104        | Zainab | 23  | 3    | NULL  | 3       | Engineering         | Building C
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">12</span><h3>الربط الأيسر (LEFT JOIN)</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Students <br>
+            <span class="keyword">LEFT JOIN</span> Department<br>
+            <span class="keyword">ON</span> Students.dept_id = Department.dept_id;
+        </div>
+        <div class="terminal-block">
+student_id | Name   | age | dept | email | dept_id | department_name     | location
+-----------|--------|-----|------|-------|---------|---------------------|-----------
+101        | Ali    | 21  | 1    | NULL  | 1       | Computer Science    | Building A
+102        | Sara   | 22  | 2    | NULL  | 2       | Information Systems | Building B
+104        | Zainab | 23  | 3    | NULL  | 3       | Engineering         | Building C
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">13</span><h3>الربط الأيمن (RIGHT JOIN)</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Students <br>
+            <span class="keyword">RIGHT JOIN</span> Department<br>
+            <span class="keyword">ON</span> Students.dept_id = Department.dept_id;
+        </div>
+        <div class="terminal-block">
+student_id | Name   | age | dept | email | dept_id | department_name     | location
+-----------|--------|-----|------|-------|---------|---------------------|-----------
+101        | Ali    | 21  | 1    | NULL  | 1       | Computer Science    | Building A
+102        | Sara   | 22  | 2    | NULL  | 2       | Information Systems | Building B
+104        | Zainab | 23  | 3    | NULL  | 3       | Engineering         | Building C
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">14</span><h3>الربط الكامل (FULL OUTER JOIN)</h3></div>
+        <div class="code-block">
+            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Students <br>
+            <span class="keyword">FULL OUTER JOIN</span> Department<br>
+            <span class="keyword">ON</span> Students.dept_id = Department.dept_id;
+        </div>
+        <div class="terminal-block">
+student_id | Name   | age | dept | email | dept_id | department_name     | location
+-----------|--------|-----|------|-------|---------|---------------------|-----------
+101        | Ali    | 21  | 1    | NULL  | 1       | Computer Science    | Building A
+102        | Sara   | 22  | 2    | NULL  | 2       | Information Systems | Building B
+104        | Zainab | 23  | 3    | NULL  | 3       | Engineering         | Building C
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span class="step-number">15</span><h3>حذف الجداول (Drop Tables)</h3></div>
+        <div class="code-block">
+            <span class="keyword">DROP TABLE</span> Students;<br>
+            <span class="keyword">DROP TABLE</span> Department;
+        </div>
+        <div class="terminal-block">
+Command(s) completed successfully.
+Command(s) completed successfully.
+        </div>
+    </div>
+
+    <footer>
+        <p>تم إعداد هذا الملف بناءً على طلب المستخدم | SQL Tutorial</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
